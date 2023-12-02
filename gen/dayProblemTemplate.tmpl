@@ -1,0 +1,26 @@
+package day{{.Day}}
+
+import (
+    "bufio"
+    "github.com/luisya22/aoc2023/fileman"
+    "github.com/spf13/cobra"
+    "log"
+)
+
+var {{.Part}}Cmd = &cobra.Command{
+    Use: "{{.Part}}",
+    Short: "Day {{.Day}}, Problem {{.PartUpperCase}}",
+    Run: func(cmd *cobra.Command, args []string) {
+
+        scanner, inputFile := fileman.GetFileLineBuffer("cmd/day{{.Day}}/input.txt")
+        defer inputFile.Close()
+
+        result := part{{.PartUpperCase}}(scanner)
+
+        log.Println("Result {{.PartUpperCase}}: ", result)
+    },
+}
+
+func part{{.PartUpperCase}}(inputScanner *bufio.Scanner) int {
+    return 0
+}
