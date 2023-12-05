@@ -24,7 +24,7 @@ func main() {
 		return
 	}
 
-	log.Println("Hello", day, time.Now().Day(), os.Args[1])
+	log.Println("Generating", day, time.Now().Day(), os.Args[1])
 
 	err = os.MkdirAll(fmt.Sprintf("cmd/day%v", day), 0777)
 	if err != nil {
