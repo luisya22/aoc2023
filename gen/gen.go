@@ -13,30 +13,38 @@ type templateData struct {
 	Part          string
 	PartUpperCase string
 	PackageName   string
+	Year          int
 	Day           int
 }
 
 func main() {
-	//var resp map[string]interface{}
-	day, err := strconv.Atoi(os.Args[1])
+
+	year, err := strconv.Atoi(os.Args[1])
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	log.Println("Generating", day, time.Now().Day(), os.Args[1])
+	//var resp map[string]interface{}
+	day, err := strconv.Atoi(os.Args[2])
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
-	err = os.MkdirAll(fmt.Sprintf("cmd/day%v", day), 0777)
+	log.Println("Generating", year, day, time.Now().Day(), "Args", os.Args[1], os.Args[2])
+
+	err = os.MkdirAll(fmt.Sprintf("cmd/year%vday%v", year, day), 0777)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
 	//TODO: Validation if file does not exists
-	generateSolutionFile("a", "A", day)
-	generateSolutionFile("b", "B", day)
-	generateImportFile(day)
-	_, err = os.Create(fmt.Sprintf("cmd/day%v/input.txt", day))
+	generateSolutionFile("a", "A", year, day)
+	generateSolutionFile("b", "B", year, day)
+	generateImportFile(year, day)
+	_, err = os.Create(fmt.Sprintf("cmd/year%vday%v/input.txt", year, day))
 	if err != nil {
 		return
 	}
@@ -81,10 +89,11 @@ func generateRootFile(dirs []string) {
 	tmpl.Execute(out, data)
 }
 
-func generateSolutionFile(part, upperCasePart string, day int) {
+func generateSolutionFile(part, upperCasePart string, year int, day int) {
 	data := templateData{
 		Part:          part,
 		PartUpperCase: upperCasePart,
+		Year:          year,
 		Day:           day,
 	}
 
@@ -94,7 +103,7 @@ func generateSolutionFile(part, upperCasePart string, day int) {
 		return
 	}
 
-	out, err := os.Create(fmt.Sprintf("cmd/day%v/%v.go", day, part))
+	out, err := os.Create(fmt.Sprintf("cmd/year%vday%v/%v.go", year, day, part))
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -103,9 +112,10 @@ func generateSolutionFile(part, upperCasePart string, day int) {
 	tmpl.Execute(out, data)
 }
 
-func generateImportFile(day int) {
+func generateImportFile(year int, day int) {
 	data := templateData{
-		Day: day,
+		Year: year,
+		Day:  day,
 	}
 
 	tmpl, err := template.New("importTemplate.tmpl").Funcs(template.FuncMap{}).ParseFiles("gen/importTemplate.tmpl")
@@ -114,7 +124,7 @@ func generateImportFile(day int) {
 		return
 	}
 
-	out, err := os.Create(fmt.Sprintf("cmd/day%v/import.go", day))
+	out, err := os.Create(fmt.Sprintf("cmd/year%vday%v/import.go", year, day))
 	if err != nil {
 		fmt.Println(err)
 		return

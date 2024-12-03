@@ -8,14 +8,17 @@ import (
 
     "github.com/spf13/cobra"
     
-    "github.com/luisya22/aoc2023/cmd/day1"
-    "github.com/luisya22/aoc2023/cmd/day2"
-    "github.com/luisya22/aoc2023/cmd/day3"
-    "github.com/luisya22/aoc2023/cmd/day4"
-    "github.com/luisya22/aoc2023/cmd/day5"
-    "github.com/luisya22/aoc2023/cmd/day6"
-    "github.com/luisya22/aoc2023/cmd/day7"
-    "github.com/luisya22/aoc2023/cmd/day8"
+    day1 "github.com/luisya22/aoc2023/cmd/day1"
+    day2 "github.com/luisya22/aoc2023/cmd/day2"
+    day3 "github.com/luisya22/aoc2023/cmd/day3"
+    day4 "github.com/luisya22/aoc2023/cmd/day4"
+    day5 "github.com/luisya22/aoc2023/cmd/day5"
+    day6 "github.com/luisya22/aoc2023/cmd/day6"
+    day7 "github.com/luisya22/aoc2023/cmd/day7"
+    day8 "github.com/luisya22/aoc2023/cmd/day8"
+    day9 "github.com/luisya22/aoc2023/cmd/day9"
+    year2024day1 "github.com/luisya22/aoc2023/cmd/year2024day1"
+    year2024day2 "github.com/luisya22/aoc2023/cmd/year2024day2"
 )
 
 func addDays(root *cobra.Command){
@@ -28,6 +31,9 @@ func addDays(root *cobra.Command){
     day6.AddCommandsTo(root)
     day7.AddCommandsTo(root)
     day8.AddCommandsTo(root)
+    day9.AddCommandsTo(root)
+    year2024day1.AddCommandsTo(root)
+    year2024day2.AddCommandsTo(root)
 }
 
 // rootCmd represents the base command when called without any subcommands
