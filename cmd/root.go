@@ -21,6 +21,7 @@ import (
     year2024day2 "github.com/luisya22/aoc2023/cmd/year2024day2"
     year2024day3 "github.com/luisya22/aoc2023/cmd/year2024day3"
     year2024day4 "github.com/luisya22/aoc2023/cmd/year2024day4"
+    year2024day5 "github.com/luisya22/aoc2023/cmd/year2024day5"
 )
 
 func addDays(root *cobra.Command){
@@ -38,6 +39,7 @@ func addDays(root *cobra.Command){
     year2024day2.AddCommandsTo(root)
     year2024day3.AddCommandsTo(root)
     year2024day4.AddCommandsTo(root)
+    year2024day5.AddCommandsTo(root)
 }
 
 // rootCmd represents the base command when called without any subcommands
